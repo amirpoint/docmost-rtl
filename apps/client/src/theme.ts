@@ -35,6 +35,11 @@ export const theme = createTheme({
     blue,
     red,
   },
+  fontFamily: "'IRANSansFaNum', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  fontFamilyMonospace: "'JetBrains Mono', 'Fira Code', Consolas, 'Liberation Mono', Menlo, Courier, monospace",
+  headings: {
+    fontFamily: "'IRANSansFaNum', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+  },
 });
 
 export const mantineCssResolver: CSSVariablesResolver = (theme) => ({

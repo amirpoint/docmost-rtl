@@ -146,7 +146,7 @@ export const TableOfContents: FC<TableOfContentsProps> = (props) => {
 
         {props.isShare && (
           <Text size="sm" c="dimmed">
-            {t("No table of contents.")}
+            {t("بدون فهرست مطالب.")}
           </Text>
         )}
       </>

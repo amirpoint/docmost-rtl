@@ -14,7 +14,7 @@ import { ActionIcon, Box, Menu, rem } from "@mantine/core";
 import {
   IconArrowRight,
   IconChevronDown,
-  IconChevronRight,
+  IconChevronLeft,
   IconCopy,
   IconDotsVertical,
   IconFileDescription,
@@ -598,7 +598,7 @@ function PageArrow({ node, onExpandTree }: PageArrowProps) {
           node.isOpen ? (
             <IconChevronDown stroke={2} size={18} />
           ) : (
-            <IconChevronRight stroke={2} size={18} />
+                          <IconChevronLeft stroke={2} size={18} />
           )
         ) : (
           <IconPointFilled size={8} />

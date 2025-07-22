@@ -108,3 +108,85 @@
 [role="treeitem"] {
     padding-bottom: 2px;
 }
+
+/* RTL support for shared/public sidebar tree */
+[dir="rtl"] .node {
+  flex-direction: row-reverse !important;
+}
+[dir="rtl"] .row {
+  flex-direction: row-reverse !important;
+}
+[dir="rtl"] .icon {
+  margin-left: 0 !important;
+  margin-right: 10px !important;
+}
+[dir="rtl"] .text {
+  text-align: right;
+}
+
+/* RTL support for shared/public sidebar tree */
+[dir="rtl"] .node {
+    flex-direction: row-reverse !important;
+  }
+  [dir="rtl"] .row {
+    flex-direction: row-reverse !important;
+  }
+  [dir="rtl"] .icon {
+    margin-left: 0 !important;
+    margin-right: 10px !important;
+  }
+  [dir="rtl"] .text {
+    text-align: right;
+  }
+  
+  /* RTL Tree Indentation - Each level indents from the right */
+  [dir="rtl"] [role="treeitem"][aria-level="1"] {
+    padding-right: 0px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="2"] {
+    padding-right: 20px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="3"] {
+    padding-right: 40px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="4"] {
+    padding-right: 60px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="5"] {
+    padding-right: 80px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="6"] {
+    padding-right: 100px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="7"] {
+    padding-right: 120px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="8"] {
+    padding-right: 140px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="9"] {
+    padding-right: 160px !important;
+  }
+  [dir="rtl"] [role="treeitem"][aria-level="10"] {
+    padding-right: 180px !important;
+  }
+  
+  /* RTL support for hover actions (ellipsis and plus icons) */
+  [dir="rtl"] .actions {
+    right: auto !important;
+    left: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+  }
+
+/* RTL support for hover actions (ellipsis and plus icons) */
+[dir="rtl"] .actions {
+  right: auto !important;
+  left: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}

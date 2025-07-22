@@ -31,11 +31,13 @@ import Shares from "@/pages/settings/shares/shares.tsx";
 import ShareLayout from "@/features/share/components/share-layout.tsx";
 import ShareRedirect from '@/pages/share/share-redirect.tsx';
 import { useTrackOrigin } from "@/hooks/use-track-origin";
+import { useRTL } from "@/hooks/use-rtl";
 
 export default function App() {
   const { t } = useTranslation();
   useRedirectToCloudSelect();
   useTrackOrigin();
+  useRTL();
 
   return (
     <>

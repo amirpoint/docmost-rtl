@@ -14,7 +14,7 @@ import { buildSharedPageUrl } from "@/features/page/page.utils.ts";
 import clsx from "clsx";
 import {
   IconChevronDown,
-  IconChevronRight,
+  IconChevronLeft,
   IconFileDescription,
   IconPointFilled,
 } from "@tabler/icons-react";
@@ -184,7 +184,7 @@ function PageArrow({ node }: PageArrowProps) {
           node.isOpen ? (
             <IconChevronDown stroke={2} size={16} />
           ) : (
-            <IconChevronRight stroke={2} size={16} />
+                            <IconChevronLeft stroke={2} size={16} />
           )
         ) : (
           <IconPointFilled size={4} />

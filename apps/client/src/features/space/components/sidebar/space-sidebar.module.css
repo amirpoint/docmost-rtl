@@ -94,3 +94,41 @@
     background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-6));
     color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
 }
+
+/* برای هدر صفحات */
+[dir="rtl"] .pagesHeader {
+  flex-direction: row-reverse !important;
+}
+
+/* برای آیتم‌های منو */
+[dir="rtl"] .menuItemInner {
+  flex-direction: row-reverse !important;
+}
+
+/* برای آیکون‌ها فاصله سمت چپ و راست را جابجا کن */
+[dir="rtl"] .menuItemIcon {
+  margin-left: 8px;
+  margin-right: 0;
+}
+[dir="ltr"] .menuItemIcon {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+/* RTL support for menu items - reverse icon and text order */
+[dir="rtl"] .menu {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .menuItemInner {
+  flex-direction: row-reverse !important;
+}
+
+/* RTL support for pages header using specific class names */
+[dir="rtl"] ._pagesHeader_h24yc_141 {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .mantine-Group-root {
+  flex-direction: row-reverse !important;
+}

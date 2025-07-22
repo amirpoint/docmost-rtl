@@ -1,0 +1,207 @@
+/* RTL Global Styles for Persian/English Support */
+
+/* Document Direction */
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Body and Root Styles */
+[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+}
+
+[dir="ltr"] body {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Input and Form Controls */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"] input,
+[dir="ltr"] textarea,
+[dir="ltr"] select {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Auto-direction detection for inputs */
+input[dir="auto"],
+textarea[dir="auto"] {
+  direction: inherit;
+  text-align: start;
+}
+
+/* Mantine Components RTL Support */
+[dir="rtl"] .mantine-Input-input {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .mantine-Textarea-input {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .mantine-PasswordInput-input {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .mantine-Select-input {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .mantine-TextInput-input {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Navigation and Sidebar */
+[dir="rtl"] .mantine-AppShell-navbar {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .mantine-AppShell-aside {
+  left: 0;
+  right: auto;
+}
+
+/* Fix aside positioning and toggle behavior in RTL mode */
+[dir="rtl"] .mantine-AppShell-aside {
+  position: fixed !important;
+  left: 0 !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* Ensure aside collapses properly in RTL */
+[dir="rtl"] .mantine-AppShell-aside[data-collapsed="true"] {
+  transform: translateX(-100%) !important;
+}
+
+[dir="rtl"] .mantine-AppShell-aside[data-collapsed="false"] {
+  transform: translateX(0) !important;
+}
+
+/* Fix main content margin when aside is open in RTL */
+[dir="rtl"] .mantine-AppShell-main {
+  margin-left: 0 !important;
+  margin-right: var(--app-shell-aside-width, 0px) !important;
+}
+
+[dir="rtl"] .mantine-Navbar-root {
+  direction: rtl;
+}
+
+[dir="rtl"] .mantine-Menu-dropdown {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Editor Specific Styles */
+[dir="rtl"] .ProseMirror {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .ProseMirror p {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .ProseMirror h1,
+[dir="rtl"] .ProseMirror h2,
+[dir="rtl"] .ProseMirror h3,
+[dir="rtl"] .ProseMirror h4,
+[dir="rtl"] .ProseMirror h5,
+[dir="rtl"] .ProseMirror h6 {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Force RTL for shared pages - AppShell components */
+[dir="rtl"] .mantine-AppShell-header {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .mantine-AppShell-navbar {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .mantine-AppShell-main {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .mantine-AppShell-aside {
+  direction: rtl !important;
+}
+
+/* RTL support for header groups and buttons */
+[dir="rtl"] .mantine-Group-root {
+  flex-direction: row-reverse !important;
+}
+
+/* RTL support for search control */
+[dir="rtl"] .mantine-UnstyledButton-root {
+  flex-direction: row-reverse !important;
+}
+
+/* RTL support for text alignment */
+[dir="rtl"] .mantine-Text-root {
+  text-align: right !important;
+}
+
+/* RTL support for buttons and action icons */
+[dir="rtl"] .mantine-Button-root {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .mantine-ActionIcon-root {
+  direction: rtl !important;
+}
+
+/* RTL support for tooltips */
+[dir="rtl"] .mantine-Tooltip-tooltip {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* RTL support for containers and scrollable areas */
+[dir="rtl"] .mantine-Container-root {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .mantine-ScrollArea-root {
+  direction: rtl !important;
+}
+
+/* RTL support for shared page tree */
+[dir="rtl"] .mantine-Box-root {
+  direction: rtl !important;
+}
+
+/* RTL support for table of contents */
+[dir="rtl"] .mantine-Stack-root {
+  direction: rtl !important;
+}
+
+[dir="rtl"] .mantine-Anchor-root {
+  direction: rtl !important;
+  text-align: right !important;
+} 

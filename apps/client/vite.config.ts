@@ -41,6 +41,8 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      host: '0.0.0.0', // Allow access from all network interfaces
+      port: 5173, // Specify port (optional)
       proxy: {
         "/api": {
           target: APP_URL,

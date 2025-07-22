@@ -12,7 +12,7 @@ export function ThemeToggle() {
   const computedColorScheme = useComputedColorScheme();
 
   return (
-    <Tooltip label="Toggle Color Scheme">
+    <Tooltip label="تغییر طرح رنگی">
       <ActionIcon
         variant="default"
         onClick={() => {

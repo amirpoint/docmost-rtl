@@ -2,7 +2,7 @@ import { Group, Text, UnstyledButton } from "@mantine/core";
 import { useJoinedWorkspacesQuery } from "../cloud/query/cloud-query";
 import { CustomAvatar } from "@/components/ui/custom-avatar.tsx";
 import classes from "./joined-workspaces.module.css";
-import { IconChevronRight } from "@tabler/icons-react";
+import { IconChevronLeft } from "@tabler/icons-react";
 import { getHostnameUrl } from "@/ee/utils.ts";
 import { Link } from "react-router-dom";
 import { IWorkspace } from "@/features/workspace/types/workspace.types.ts";
@@ -42,7 +42,7 @@ export default function JoinedWorkspaces() {
                 </Text>
               </div>
 
-              <IconChevronRight size={16} />
+                              <IconChevronLeft size={16} />
             </Group>
           </UnstyledButton>
         ))}

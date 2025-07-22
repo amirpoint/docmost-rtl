@@ -10,7 +10,6 @@ import {
   IconBrush,
   IconCheck,
   IconChevronDown,
-  IconChevronRight,
   IconDeviceDesktop,
   IconLogout,
   IconMoon,

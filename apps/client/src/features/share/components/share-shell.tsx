@@ -37,6 +37,9 @@ import {
 import { ShareSearchSpotlight } from "@/features/search/share-search-spotlight";
 import { shareSearchSpotlight } from "@/features/search/constants";
 import ShareBranding from '@/features/share/components/share-branding.tsx';
+import Logo from '@/assets/Logo.svg';
+import SharedBreadcrumb from '@/features/share/components/shared-breadcrumb.tsx';
+import { buildSharedPageTree } from '@/features/share/utils.ts';
 
 const MemoizedSharedTree = React.memo(SharedTree);
 
@@ -45,7 +48,7 @@ export default function ShareShell({
 }: {
   children: React.ReactNode;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [mobileOpened] = useAtom(mobileSidebarAtom);
   const [desktopOpened] = useAtom(desktopSidebarAtom);
   const toggleMobile = useToggleSidebar(mobileSidebarAtom);
@@ -59,6 +62,13 @@ export default function ShareShell({
   const { shareId } = useParams();
   const { data } = useGetSharedPageTreeQuery(shareId);
   const readOnlyEditor = useAtomValue(readOnlyEditorAtom);
+
+  // Check if current language is RTL - more robust detection
+  const isRTL = i18n.language === 'fa-IR' || 
+                i18n.language === 'fa' || 
+                i18n.language?.startsWith('fa') ||
+                document.documentElement.dir === 'rtl' ||
+                document.documentElement.lang?.startsWith('fa');
 
   return (
     <AppShell
@@ -83,8 +93,9 @@ export default function ShareShell({
       }}
       padding="md"
     >
-      <AppShell.Header>
+      <AppShell.Header style={isRTL ? { direction: 'rtl', textAlign: 'right' } : {}}>
         <Group wrap="nowrap" justify="space-between" py="sm" px="xl">
+          {/* Left side - Toggle buttons */}
           <Group wrap="nowrap">
             {data?.pageTree?.length > 1 && (
               <>
@@ -111,44 +122,55 @@ export default function ShareShell({
             )}
           </Group>
 
-          {shareId && (
-            <Group visibleFrom="sm">
-              <SearchControl onClick={shareSearchSpotlight.open} />
-            </Group>
-          )}
+          {/* Center - Logo */}
+          <Group justify="center" style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', zIndex: 1 }}>
+            <img 
+              src={Logo} 
+              alt="Logo" 
+              style={{ 
+                height: '32px', 
+                width: 'auto',
+                objectFit: 'contain'
+              }} 
+            />
+          </Group>
 
-          <Group>
-            <>
-              {shareId && (
+          {/* Right side - Search, TOC, Theme */}
+          <Group gap="xs">
+            {shareId && (
+              <>
+                <Group visibleFrom="sm">
+                  <SearchControl onClick={shareSearchSpotlight.open} />
+                </Group>
                 <Group hiddenFrom="sm">
                   <SearchMobileControl onSearch={shareSearchSpotlight.open} />
                 </Group>
-              )}
+              </>
+            )}
 
-              <Tooltip label={t("Table of contents")} withArrow>
-                <ActionIcon
-                  variant="default"
-                  style={{ border: "none" }}
-                  onClick={toggleTocMobile}
-                  hiddenFrom="sm"
-                  size="sm"
-                >
-                  <IconList size={20} stroke={2} />
-                </ActionIcon>
-              </Tooltip>
+            <Tooltip label={t("Table of contents")} withArrow>
+              <ActionIcon
+                variant="default"
+                style={{ border: "none" }}
+                onClick={toggleTocMobile}
+                hiddenFrom="sm"
+                size="sm"
+              >
+                <IconList size={20} stroke={2} />
+              </ActionIcon>
+            </Tooltip>
 
-              <Tooltip label={t("Table of contents")} withArrow>
-                <ActionIcon
-                  variant="default"
-                  style={{ border: "none" }}
-                  onClick={toggleToc}
-                  visibleFrom="sm"
-                  size="sm"
-                >
-                  <IconList size={20} stroke={2} />
-                </ActionIcon>
-              </Tooltip>
-            </>
+            <Tooltip label={t("Table of contents")} withArrow>
+              <ActionIcon
+                variant="default"
+                style={{ border: "none" }}
+                onClick={toggleToc}
+                visibleFrom="sm"
+                size="sm"
+              >
+                <IconList size={20} stroke={2} />
+              </ActionIcon>
+            </Tooltip>
 
             <ThemeToggle />
           </Group>
@@ -156,15 +178,22 @@ export default function ShareShell({
       </AppShell.Header>
 
       {data?.pageTree?.length > 1 && (
-        <AppShell.Navbar p="md" className={classes.navbar}>
+        <AppShell.Navbar p="md" className={classes.navbar} style={isRTL ? { direction: 'rtl', textAlign: 'right' } : {}}>
           <MemoizedSharedTree sharedPageTree={data} />
         </AppShell.Navbar>
       )}
 
-      <AppShell.Main>
+      <AppShell.Main style={isRTL ? { direction: 'rtl', textAlign: 'right' } : {}}>
+        {/* Breadcrumb at the top of main content */}
+        {data?.pageTree && (
+          <div style={{ padding: '16px', paddingBottom: '8px' }}>
+            <SharedBreadcrumb pageTree={buildSharedPageTree(data.pageTree)} />
+          </div>
+        )}
+        
         {children}
 
-        {data && shareId && !data.hasLicenseKey && <ShareBranding />}
+        {data && shareId && !data.hasLicenseKey && true}
       </AppShell.Main>
 
       <AppShell.Aside
@@ -173,7 +202,7 @@ export default function ShareShell({
         className={classes.aside}
       >
         <ScrollArea style={{ height: "80vh" }} scrollbarSize={5} type="scroll">
-          <div style={{ paddingBottom: "50px" }}>
+          <div style={{ paddingBottom: "50px", ...(isRTL ? { direction: 'rtl', textAlign: 'right' } : {}) }}>
             {readOnlyEditor && (
               <TableOfContents isShare={true} editor={readOnlyEditor} />
             )}
