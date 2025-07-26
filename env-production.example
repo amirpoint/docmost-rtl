@@ -1,0 +1,32 @@
+# Docmost Production Environment - Docker
+# کپی کنید به .env و مقادیر را تغییر دهید
+
+# App Configuration
+APP_SECRET=REPLACE_WITH_VERY_LONG_SECURE_RANDOM_STRING_AT_LEAST_32_CHARACTERS
+APP_URL=http://your-domain.com  # دامنه سرور خود را اینجا قرار دهید
+
+# Database Configuration  
+DB_PASSWORD=REPLACE_WITH_STRONG_DATABASE_PASSWORD
+
+# Optional: External Database (اگر از دیتابیس خارجی استفاده می‌کنید)
+# DATABASE_URL=postgresql://username:password@external-host:5432/docmost?schema=public
+
+# Optional: External Redis (اگر از Redis خارجی استفاده می‌کنید)
+# REDIS_URL=redis://external-redis-host:6379
+
+# File Upload Limits (bytes)
+FILE_UPLOAD_SIZE_LIMIT=52428800  # 50MB
+FILE_IMPORT_SIZE_LIMIT=52428800  # 50MB
+
+# Integration URLs
+DRAWIO_URL=https://embed.diagrams.net
+
+# Advanced Settings (اختیاری)
+# COLLAB_URL=ws://your-domain.com/socket.io
+# SUBDOMAIN_HOST=your-domain.com
+# POSTHOG_HOST=https://app.posthog.com
+# POSTHOG_KEY=your-posthog-key
+
+# Backup Settings
+BACKUP_SCHEDULE=0 2 * * *  # روزانه در ساعت 2 صبح
+BACKUP_RETENTION_DAYS=30 

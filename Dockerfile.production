@@ -1,0 +1,85 @@
+# Multi-stage Docker build for production deployment
+FROM node:22-alpine AS base
+LABEL org.opencontainers.image.source="https://github.com/docmost/docmost"
+
+# Build stage
+FROM base AS builder
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apk add --no-cache python3 make g++
+
+# Copy package files for better caching
+COPY package.json pnpm*.yaml ./
+COPY apps/server/package.json ./apps/server/
+COPY apps/client/package.json ./apps/client/  
+COPY packages/editor-ext/package.json ./packages/editor-ext/
+
+# Install pnpm
+RUN npm install -g pnpm@10.4.0
+
+# Copy patches and install dependencies
+COPY patches ./patches
+RUN pnpm install --frozen-lockfile
+
+# Install TypeScript for build
+RUN npm install -g typescript
+
+# Copy source code
+COPY . .
+
+# Build all packages
+RUN pnpm build
+
+# Production stage
+FROM base AS production
+
+# Install runtime dependencies
+RUN apk add --no-cache curl bash dumb-init
+
+# Create app user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S docmost -u 1001 -G nodejs
+
+WORKDIR /app
+
+# Copy built applications
+COPY --from=builder --chown=docmost:nodejs /app/apps/server/dist ./apps/server/dist
+COPY --from=builder --chown=docmost:nodejs /app/apps/client/dist ./apps/client/dist
+COPY --from=builder --chown=docmost:nodejs /app/packages/editor-ext/dist ./packages/editor-ext/dist
+
+# Copy package files
+COPY --from=builder --chown=docmost:nodejs /app/apps/server/package.json ./apps/server/package.json
+COPY --from=builder --chown=docmost:nodejs /app/packages/editor-ext/package.json ./packages/editor-ext/package.json
+COPY --from=builder --chown=docmost:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=docmost:nodejs /app/pnpm*.yaml ./
+
+# Install pnpm
+RUN npm install -g pnpm@10.4.0
+
+# Create production workspace configuration
+RUN echo '{"name":"docmost","private":true,"scripts":{"start":"pnpm --filter ./apps/server run start:prod","collab":"pnpm --filter ./apps/server run collab:prod"},"dependencies":{"@docmost/editor-ext":"workspace:*"},"workspaces":{"packages":["apps/server","packages/editor-ext"]}}' > package.json
+
+# Install only production dependencies
+RUN cd apps/server && pnpm install --prod --frozen-lockfile
+
+# Create directories and set permissions
+RUN mkdir -p /app/data/storage && \
+    chown -R docmost:nodejs /app
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/health || exit 1
+
+# Switch to non-root user
+USER docmost
+
+# Expose port
+EXPOSE 3000
+
+# Use dumb-init for proper signal handling
+ENTRYPOINT ["dumb-init", "--"]
+
+# Start command
+CMD ["pnpm", "start"] 
