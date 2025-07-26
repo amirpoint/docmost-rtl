@@ -1,10 +1,11 @@
 .env
 .env.dev
-.env.prod
+.env.production
 data
 # compiled output
 /dist
 /node_modules
+/ssl
 
 # Logs
 logs
