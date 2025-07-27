@@ -1,4 +1,4 @@
-# Docker Compose for Production
+version: '3.3'
 
 services:
   nginx:
