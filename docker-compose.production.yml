@@ -32,7 +32,7 @@ services:
       - "3000"
     restart: unless-stopped
     volumes:
-      - docmost_data:/app/data/storage
+      - docmost_data:/data
       - ./logs/app:/app/logs
     networks:
       - docmost-network
