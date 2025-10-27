@@ -95,9 +95,22 @@ export function getPostHogKey() {
   return getConfigValue("POSTHOG_KEY");
 }
 
+export function getClarityProjectId() {
+  return getConfigValue("CLARITY_PROJECT_ID");
+}
+
+export function isClarityEnabled(): boolean {
+  return Boolean(getClarityProjectId());
+}
+
 function getConfigValue(key: string, defaultValue: string = undefined): string {
-  const rawValue = import.meta.env.DEV
-    ? process?.env?.[key]
-    : window?.CONFIG?.[key];
+  // Check if window.CONFIG exists (production mode with backend)
+  // If it exists, use it. Otherwise, fallback to process.env (dev mode)
+  const hasWindowConfig = typeof window !== 'undefined' && (window as any).CONFIG;
+
+  const rawValue = hasWindowConfig
+    ? (window as any).CONFIG[key]
+    : process?.env?.[key];
+
   return rawValue ?? defaultValue;
 }

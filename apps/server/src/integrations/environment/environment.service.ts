@@ -213,4 +213,8 @@ export class EnvironmentService {
   getPostHogKey(): string {
     return this.configService.get<string>('POSTHOG_KEY');
   }
+
+  getClarityProjectId(): string {
+    return this.configService.get<string>('CLARITY_PROJECT_ID');
+  }
 }

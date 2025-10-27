@@ -18,6 +18,8 @@ import {
   getPostHogKey,
   isCloud,
   isPostHogEnabled,
+  getClarityProjectId,
+  isClarityEnabled,
 } from "@/lib/config.ts";
 import posthog from "posthog-js";
 
@@ -39,6 +41,15 @@ if (isCloud() && isPostHogEnabled) {
     disable_session_recording: true,
     capture_pageleave: false,
   });
+}
+
+// Initialize Microsoft Clarity
+if (isClarityEnabled()) {
+  (function(c: any, l: any, a: string, r: string, i: string, t?: any, y?: any) {
+    c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, "clarity", "script", getClarityProjectId());
 }
 
 const root = ReactDOM.createRoot(

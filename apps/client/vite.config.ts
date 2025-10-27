@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
     BILLING_TRIAL_DAYS,
     POSTHOG_HOST,
     POSTHOG_KEY,
+    CLARITY_PROJECT_ID,
   } = loadEnv(mode, envPath, "");
 
   return {
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
         BILLING_TRIAL_DAYS,
         POSTHOG_HOST,
         POSTHOG_KEY,
+        CLARITY_PROJECT_ID,
       },
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
     },
