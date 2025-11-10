@@ -39,11 +39,18 @@ export const LinkExtension = TiptapLink.extend({
       ];
     }
 
+    // Check if the link is to help.smartx.ir subdomain
+    const href = HTMLAttributes.href || "";
+    const isHelpSmartxLink = href.includes("help.smartx.ir");
+
+    // Add target="_blank" for external links (not help.smartx.ir)
+    const linkAttributes = isHelpSmartxLink
+      ? { class: "link" }
+      : { class: "link", target: "_blank", rel: "noopener noreferrer" };
+
     return [
       "a",
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-        class: "link",
-      }),
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, linkAttributes),
       0,
     ];
   },

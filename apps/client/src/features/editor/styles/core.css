@@ -105,9 +105,9 @@
     border-top: 1px solid #68cef8;
   }
 
-  .ProseMirror-selectednode {
+  /* .ProseMirror-selectednode {
     outline: 2px solid #70cff8;
-  }
+  } */
 
   & > .react-renderer {
     margin-top:  var(--mantine-spacing-sm);

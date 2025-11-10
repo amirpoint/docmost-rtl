@@ -1,4 +1,4 @@
-version: '3.3'
+#version: '3.3'
 
 services:
   nginx:
@@ -45,6 +45,8 @@ services:
   db:
     image: postgres:16-alpine
     container_name: docmost-postgres
+    ports:
+      - "55432:5432"
     environment:
       POSTGRES_DB: docmost
       POSTGRES_USER: docmost

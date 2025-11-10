@@ -15,7 +15,6 @@ import clsx from "clsx";
 import {
   IconChevronDown,
   IconChevronLeft,
-  IconFileDescription,
   IconPointFilled,
 } from "@tabler/icons-react";
 import { ActionIcon, Box } from "@mantine/core";
@@ -143,20 +142,16 @@ function Node({ node, style, tree }: NodeRendererProps<any>) {
         }}
       >
         <PageArrow node={node} />
-        <div style={{ marginRight: "4px" }}>
-          <EmojiPicker
-            onEmojiSelect={() => {}}
-            icon={
-              node.data.icon ? (
-                node.data.icon
-              ) : (
-                <IconFileDescription size="18" />
-              )
-            }
-            readOnly={true}
-            removeEmojiAction={() => {}}
-          />
-        </div>
+        {node.data.icon && (
+          <div style={{ marginRight: "4px" }}>
+            <EmojiPicker
+              onEmojiSelect={() => {}}
+              icon={node.data.icon}
+              readOnly={true}
+              removeEmojiAction={() => {}}
+            />
+          </div>
+        )}
         <span className={classes.text}>{node.data.name || t("untitled")}</span>
       </Box>
     </>
